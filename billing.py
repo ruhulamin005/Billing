@@ -105,7 +105,7 @@ class Ui_MainWindow(object):
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
-        self.combo = QtWidgets.QComboBox(self.frame)
+        combo = self.combo = QtWidgets.QComboBox(self.frame)
         self.combo.setGeometry(QtCore.QRect(10, 130, 341, 31))
         self.combo.setObjectName("combo")
         self.label_2 = QtWidgets.QLabel(self.frame)
@@ -194,8 +194,53 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
+        #adding item to combo
+        #"1. New Tires "
+         #               ,"2. Oil services","3. Oil filter change","4. Diesel filter change ",
+          #                  "5. Grease ",
+          #              "6. Air filter cleane",
+           #             "7. Engine clean With Diesel",
+            #                "8. Air check ",
+             #           "9. Bolt",
+              #          "10. Bolt  change ",
+               #         "11. Pancher",
+              #          "12. Pancher and patch fitting",
+              #          "13. New tube",
+               #         "14. New tube fitting",
+               #         "15. Ring ",
+               #         "16. Ring.  Balp change",
+               #         "17. Tire chang"
+
+        combo.addItem("1. New Tires")
+        combo.addItem("2. Oil services ")
+        combo.addItem("3. Oil filter change ")
+        combo.addItem("4. Diesel filter change")
+        combo.addItem("5. Grease")
+        combo.addItem("6. Air filter clean")
+        combo.addItem("7. Engine clean With Diesel ")
+        combo.addItem("8. Air check")
+        combo.addItem("9. Bolt")
+        combo.addItem("10. Bolt  change ")
+        combo.addItem("11. Pancher ")
+        combo.addItem("12. Pancher and patch fitting")
+        combo.addItem("13. New tube ")
+        combo.addItem("14. New tube fitting ")
+        combo.addItem("15. Ring ")
+        combo.addItem("16. Ring.  Balp change")
+        combo.addItem("17. Tire chang ")
+
+        self.combo.activated[str].connect(self.onSelected)
+        
+
+
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def onSelected(self, combo_text):
+        #print(combo_text)
+        pass
+
 
     def add_it(self):
         name = self.name.text()
@@ -223,6 +268,14 @@ class Ui_MainWindow(object):
 
         notes = self.notes.text()
         self.list.addItem(notes)
+
+        
+
+        choosen = self.combo.currentText()
+        self.list.addItem(choosen)
+
+        bill = name + "\n" +phone + "\n"+choosen+"\n"+amount+"\n"+additional+"\n"+notes
+        self.list.addItem(bill)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
